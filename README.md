@@ -39,6 +39,10 @@ The `dist/spass` is a [crunched](https://blog.filippo.io/shrink-your-go-binaries
 
  * [upx](https://upx.github.io/) for the release build
 
+### TODO
+
+ * [ ] integrate upx into a local build process (possibly just build via docker)
+
 ## Testing (WIP)
 
 ### Development
