@@ -31,8 +31,10 @@ Where `X` is the spam threshold to discard
 
     make
 
-The binary is `dist/spass`
+This creates `dist/spass` and `dist/spass-debug`
 
-## Build requirements
+The `dist/spass` is a [crunched](https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick/) binary (by about ~80%) 
 
- * upx 
+## External build requirements
+
+ * [upx](https://upx.github.io/) for the release build
