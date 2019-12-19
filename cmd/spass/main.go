@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+	"syscall"
 )
 
 var (
@@ -32,6 +33,9 @@ func main() {
 
 	inHeaders := true
 	headers := make([]string, 0)
+	if err := syscall.SetNonblock(0, true); err != nil {
+		panic(err)
+	}
 	scanner := bufio.NewScanner(os.Stdin)
 
 	//_, _ = fmt.Fprintf(os.Stderr, "DEBUG: %s\n", "testing spam score");
