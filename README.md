@@ -21,9 +21,7 @@ Edit `/var/qmail/mailnames/DOMAIN/USER/.qmail`
 
 And add the following
 
-    |/usr/bin/spass -t X
-
-Where `X` is the spam threshold to discard
+    |/usr/bin/spass
 
 > If forwarding add it before the forward!
 
