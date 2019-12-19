@@ -38,3 +38,11 @@ The `dist/spass` is a [crunched](https://blog.filippo.io/shrink-your-go-binaries
 ## External build requirements
 
  * [upx](https://upx.github.io/) for the release build
+
+## Testing (WIP)
+
+`cat` a test fixture to the binary
+
+For the pipe the following is valid;
+ - no output would be [carry on delivering](https://en.wikipedia.org/wiki/Carry_On_(franchise)#Carry_On_films)
+ - otherwise it would be deferred with the output message
