@@ -1,4 +1,4 @@
-# A Plesk Spam Assistant
+# Postfix Spamassassin Assistant
 
 A `postfix/pipe` for discarding spam rated above a certain threshold.
 
@@ -48,6 +48,8 @@ The `dist/spass` is a [crunched](https://blog.filippo.io/shrink-your-go-binaries
 For the pipe the following is valid;
  - no output would be [carry on delivering](https://en.wikipedia.org/wiki/Carry_On_(franchise)#Carry_On_films)
  - otherwise it would be deferred with the output message
+ 
+        discarded spam SCORE/THRESHOLD
 
 ### Production
 
