@@ -2,11 +2,7 @@
 
 A `postfix/pipe` for discarding spam rated above a certain threshold.
 
-> The mail is actually _deferred_ and will eventually be bounced (with a reply to the sender)
-
-# TODO
-
- * [ ] do not defer but discard
+> The mail is actually _deferred_ and will eventually be discarded
 
 ## Parameters
 
