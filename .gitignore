@@ -1,0 +1,6 @@
+.spass
+.gitcookies
+.idea
+.vscode/
+dist/
+builds/
