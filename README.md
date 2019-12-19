@@ -9,7 +9,7 @@ A `postfix/pipe` for discarding spam rated above a certain threshold.
 |Parameter|Description|Default|
 |---|---|---|
 |-t|The threshold|50|
-|-D|A dir to write all discarded mails to for later perusal or for spam/ham learning purposes||
+|-D|A dir to write all discarded mails to for later perusal or for spam/ham learning purposes (WIP)||
 
 ## Examples
 
