@@ -56,3 +56,7 @@ For the pipe the following is valid;
 ### Production
 
 Send a [GTUBE mail](https://spamassassin.apache.org/gtube/) to a configured recipient
+
+## Pronunciation
+
+[IPA](https://en.wiktionary.org/wiki/Wiktionary:International_Phonetic_Alphabet)<sup>([key](https://en.wiktionary.org/wiki/Appendix:English_pronunciation))</sup> [/spæz/](https://en.wiktionary.org/wiki/spaz#Pronunciation)
