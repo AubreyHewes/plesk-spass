@@ -1,4 +1,4 @@
-.PHONY: clean checks test build image e2e fmt
+.PHONY: clean checks test build build-debug image e2e fmt
 
 export GO111MODULE=on
 
@@ -21,7 +21,11 @@ default: clean generate-dns checks test build
 clean:
 	rm -rf dist/ builds/ cover.out
 
-build: clean
+build-debug:
+	@echo Version: $(VERSION)
+	go build -v -ldflags '-X "main.version=${VERSION}"' -o ${BIN_OUTPUT}-debug ${MAIN_DIRECTORY}
+
+build: clean build-debug
 	@echo Version: $(VERSION)
 	# https://blog.filippo.io/shrink-your-go-binaries-with-this-one-weird-trick/
 	go build -v -ldflags '-s -w -X "main.version=${VERSION}"' -o ${BIN_OUTPUT} ${MAIN_DIRECTORY}
