@@ -41,8 +41,14 @@ The `dist/spass` is a [crunched](https://blog.filippo.io/shrink-your-go-binaries
 
 ## Testing (WIP)
 
+### Development
+
 `cat` a test fixture to the binary
 
 For the pipe the following is valid;
  - no output would be [carry on delivering](https://en.wikipedia.org/wiki/Carry_On_(franchise)#Carry_On_films)
  - otherwise it would be deferred with the output message
+
+### Production
+
+Send a [GTUBE mail](https://spamassassin.apache.org/gtube/) to a configured recipient
