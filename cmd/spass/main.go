@@ -16,6 +16,8 @@ import (
 
 var (
 	version = "dev"
+	// Exit codes from <sysexits.h>
+	EX_TEMPFAIL = 75
 )
 
 func main() {
@@ -57,8 +59,22 @@ func main() {
 			score := regexp.MustCompile(`^.*score=(.*?)\s.*$`).ReplaceAllString(line, `$1`)
 			scoreFloat64, _ := strconv.ParseFloat(score, 32)
 			if scoreFloat64 >= threshold64 {
-				_, _ = fmt.Fprintf(os.Stderr, "5.7.1 deleted spam %.2f/%.2f\n", scoreFloat64, threshold64)
-				os.Exit(1)
+
+				//
+				// Command  exit  status  codes  are  expected  to  follow the conventions
+				// defined in <sysexits.h>.  Exit status 0 means normal successful completion.
+				//
+				// In the case of a non-zero exit status, a limited amount of command output
+				// is reported in an delivery status notification.   When  the  output
+				// begins  with  a  4.X.X  or  5.X.X enhanced status code, the status code
+				// takes precedence over the non-zero exit status (Postfix version 2.3 and
+				// later).
+				//
+				// Thus, see /usr/include/sysexits.h for appropriate exit status codes.
+				// To defer mail, EX_TEMPFAIL (75) comes to mind.
+
+				_, _ = fmt.Fprintf(os.Stderr, "discarded spam %.2f/%.2f\n", scoreFloat64, threshold64)
+				os.Exit(EX_TEMPFAIL)
 			}
 		}
 
