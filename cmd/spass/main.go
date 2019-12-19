@@ -5,7 +5,6 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"regexp"
 	"runtime"
@@ -22,8 +21,9 @@ var (
 
 func main() {
 	//flag.Usage = usage
-	var threshold = flag.Int("t", 15, "help message for threshold")
-	var showVersion = flag.Bool("v", false, "prints current roxy version")
+	var threshold = flag.Int("t", 50, "set discard threshold")
+	var showVersion = flag.Bool("v", false, "prints current version")
+	var writeToDirectory = flag.String("D", "", "write discarded mails to this directory")
 	flag.Parse()
 
 	if *showVersion {
@@ -34,24 +34,28 @@ func main() {
 	threshold64 := float64(*threshold)
 
 	inHeaders := true
-	headers := make([]string, 0)
+	isWritingToDirectory := *writeToDirectory != ""
+
 	if err := syscall.SetNonblock(0, true); err != nil {
 		panic(err)
 	}
 	scanner := bufio.NewScanner(os.Stdin)
 
 	//_, _ = fmt.Fprintf(os.Stderr, "DEBUG: %s\n", "testing spam score");
+	buffer := make([]string, 0)
 	for scanner.Scan() {
 		line := scanner.Text()
 
+		// the first empty line is between the headers and the body
 		if inHeaders && len(strings.TrimSpace(line)) == 0 {
 			inHeaders = false
-			headers = append(headers, "X-Spam-Sieve: 1")
-			fmt.Println(strings.Join(headers, "\n"))
+			if isWritingToDirectory {
+				buffer = append(buffer, line)
+			}
 		}
 
-		if inHeaders {
-			headers = append(headers, line)
+		if inHeaders && isWritingToDirectory {
+			buffer = append(buffer, line)
 		}
 
 		if inHeaders && strings.HasPrefix(line, "X-Spam-Status: Yes") {
@@ -78,12 +82,17 @@ func main() {
 			}
 		}
 
-		if !inHeaders {
-			fmt.Println(line)
+		if !inHeaders && isWritingToDirectory {
+			buffer = append(buffer, line)
 		}
 	}
 
+	if isWritingToDirectory {
+		// TODO write to directory
+		fmt.Println(strings.Join(buffer, "\n"))
+	}
+
 	if err := scanner.Err(); err != nil {
-		log.Println(err)
+		_, _ = fmt.Fprint(os.Stderr, err)
 	}
 }
